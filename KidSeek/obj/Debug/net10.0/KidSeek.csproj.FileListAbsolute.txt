@@ -201,3 +201,4 @@ D:\thuc_tap_h_pai_media\project\KidSeek\bin\Debug\net10.0\runtimes\win\lib\net6.
 D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.csproj.AssemblyReference.cache
 D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.MvcApplicationPartsAssemblyInfo.cs
 D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.csproj.Up2Date
+D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.sourcelink.json

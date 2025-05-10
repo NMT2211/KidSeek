@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<KidSeekDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
 // ✅ Chạy API thuần, không dùng Razor view
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
