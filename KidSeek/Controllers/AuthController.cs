@@ -45,11 +45,11 @@ namespace KidSeek.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)
         {
-            var user = _context.Users.FirstOrDefault(
-                u => u.Username == dto.Username && u.Password == dto.Password
+            var email = _context.Users.FirstOrDefault(
+                u => u.Email == dto.Email && u.Password == dto.Password
             );
 
-            if (user == null)
+            if (email == null)
                 return Unauthorized("Sai tên đăng nhập hoặc mật khẩu");
 
             return Ok(new
