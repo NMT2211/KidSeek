@@ -8,14 +8,24 @@ builder.Services.AddDbContext<KidSeekDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-// ✅ Chạy API thuần, không dùng Razor view
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Cấu hình CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        policy => policy.WithOrigins("http://localhost:3000") // <-- Đúng cổng React của bạn
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials());
+});
+
 var app = builder.Build();
 
-// Middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error");
@@ -24,13 +34,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+app.UseCors("AllowLocalhost"); // ✅ Đặt ở đây
 app.UseAuthorization();
 
-// ✅ Swagger cho test API
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
-
 app.Run();

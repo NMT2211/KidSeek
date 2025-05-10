@@ -30,7 +30,9 @@ namespace KidSeek.Api.Controllers
                 Username = dto.Username,
                 Password = dto.Password, // nên hash ở bước sau
                 Email = dto.Email,
-                Role = dto.Role
+                Role = dto.Role,
+                Age = dto.Age,
+                Grade = dto.Grade
             };
 
             _context.Users.Add(user);
@@ -38,6 +40,7 @@ namespace KidSeek.Api.Controllers
 
             return Ok(new { message = "Đăng ký thành công", user.Username });
         }
+
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)

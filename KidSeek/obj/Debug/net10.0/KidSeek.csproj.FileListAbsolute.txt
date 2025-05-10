@@ -202,3 +202,5 @@ D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.csproj.Assembl
 D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.MvcApplicationPartsAssemblyInfo.cs
 D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.csproj.Up2Date
 D:\thuc_tap_h_pai_media\project\KidSeek\obj\Debug\net10.0\KidSeek.sourcelink.json
+D:\thuc_tap_h_pai_media\project\KidSeek\bin\Debug\net10.0\package-lock.json
+D:\thuc_tap_h_pai_media\project\KidSeek\bin\Debug\net10.0\package.json

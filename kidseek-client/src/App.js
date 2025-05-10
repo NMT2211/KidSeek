@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CourseList from './pages/CourseList';
 import AdminDashboard from './pages/AdminDashboard';
-import ChatAI from './pages/ChatAI';
+
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/courses" element={<CourseList />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/chat" element={<ChatAI />} />
+       
       </Routes>
     </BrowserRouter>
   );

@@ -15,6 +15,10 @@ CREATE TABLE Users (
     Email NVARCHAR(255),
     Role NVARCHAR(50)
 );
+ALTER TABLE Users
+ADD Age INT NULL,
+    Grade INT NULL;
+
 
 -- Subjects table
 CREATE TABLE Subjects (
