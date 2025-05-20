@@ -23,12 +23,20 @@ namespace KidSeek.Api.Controllers
         public IActionResult Register([FromBody] RegisterDto dto)
         {
             if (_context.Users.Any(u => u.Username == dto.Username))
-                return BadRequest("Tên đăng nhập đã tồn tại");
+                return BadRequest(new { error = "Tên đăng nhập đã tồn tại" });
+
+            if (_context.Users.Any(u => u.Email == dto.Email))
+                return BadRequest(new { error = "Email đã được sử dụng" });
+
+            var allowedRoles = new[] { "Phu_huynh", "Giao_vien", "Hoc_sinh", "Admin" };
+            if (!allowedRoles.Contains(dto.Role))
+                return BadRequest(new { error = "Vai trò không hợp lệ" });
 
             var user = new User
             {
                 Username = dto.Username,
-                Password = dto.Password, // nên hash ở bước sau
+                Fullname = dto.Fullname,
+                Password = dto.Password,
                 Email = dto.Email,
                 Role = dto.Role,
                 Age = dto.Age,
@@ -42,23 +50,30 @@ namespace KidSeek.Api.Controllers
         }
 
 
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)
         {
-            var email = _context.Users.FirstOrDefault(
-                u => u.Email == dto.Email && u.Password == dto.Password
+            var user = _context.Users.FirstOrDefault(
+                u => (u.Username == dto.UsernameOrEmail || u.Email == dto.UsernameOrEmail)
+                    && u.Password == dto.Password
             );
 
-            if (email == null)
-                return Unauthorized("Sai tên đăng nhập hoặc mật khẩu");
+            if (user == null)
+                return Unauthorized("Sai tên đăng nhập/email hoặc mật khẩu");
 
             return Ok(new
             {
                 message = "Đăng nhập thành công",
                 user.UserId,
                 user.Username,
+                user.Fullname,
+                user.Age,
+                user.Grade,
+                user.Email,
                 user.Role
             });
         }
+
     }
 }

@@ -1,35 +1,34 @@
-﻿create database KidSeek
-use KidSeek
-
+﻿-- Tạo database KidSeek
+-- ===================== TẠO LẠI DATABASE =====================
 
 CREATE DATABASE KidSeek;
 GO
 USE KidSeek;
 GO
 
--- Users table
+-- ===================== NGƯỜI DÙNG =====================
 CREATE TABLE Users (
     UserId INT PRIMARY KEY IDENTITY,
-    Username NVARCHAR(100) NOT NULL,
+    Username VARCHAR(100) NOT NULL,
     Password NVARCHAR(255) NOT NULL,
     Email NVARCHAR(255),
-    Role NVARCHAR(50)
+    Role NVARCHAR(50),
+    Fullname NVARCHAR(100),
+    Age INT,
+    Grade INT
 );
-ALTER TABLE Users
-ADD Age INT NULL,
-    Grade INT NULL;
 
-
--- Subjects table
+-- ===================== MÔN HỌC =====================
 CREATE TABLE Subjects (
     SubjectId INT PRIMARY KEY IDENTITY,
     Name NVARCHAR(255),
     Description NVARCHAR(MAX),
     Image NVARCHAR(255),
+    Grade INT,
     CreatedAt DATETIME DEFAULT GETDATE()
 );
 
--- Lectures table
+-- ===================== BÀI GIẢNG =====================
 CREATE TABLE Lectures (
     LectureId INT PRIMARY KEY IDENTITY,
     SubjectId INT FOREIGN KEY REFERENCES Subjects(SubjectId),
@@ -39,16 +38,16 @@ CREATE TABLE Lectures (
     QuizId INT NULL
 );
 
--- Messages table (Chat with AI)
+-- ===================== HỘI THOẠI AI =====================
 CREATE TABLE Messages (
     MessageId INT PRIMARY KEY IDENTITY,
     UserId INT FOREIGN KEY REFERENCES Users(UserId),
-    Role NVARCHAR(50), -- user / assistant
+    Role NVARCHAR(50),
     Content TEXT,
     SentAt DATETIME DEFAULT GETDATE()
 );
 
--- Assignments table
+-- ===================== BÀI TẬP =====================
 CREATE TABLE Assignments (
     AssignmentId INT PRIMARY KEY IDENTITY,
     SubjectId INT FOREIGN KEY REFERENCES Subjects(SubjectId),
@@ -56,20 +55,20 @@ CREATE TABLE Assignments (
     Title NVARCHAR(255),
     Description TEXT,
     DueDate DATETIME,
-    Status NVARCHAR(50) -- submitted / not_submitted
+    Status NVARCHAR(50)
 );
 
--- Practice questions table
+-- ===================== NGÂN HÀNG CÂU HỎI =====================
 CREATE TABLE Practices (
     PracticeId INT PRIMARY KEY IDENTITY,
     SubjectId INT FOREIGN KEY REFERENCES Subjects(SubjectId),
     Question TEXT,
     Answer NVARCHAR(255),
     Explanation TEXT,
-    Type NVARCHAR(50) -- multiple_choice / true_false / fill_in_the_blank
+    Type NVARCHAR(50)
 );
 
--- Subscription packages table
+-- ===================== GÓI HỌC =====================
 CREATE TABLE Subscriptions (
     SubscriptionId INT PRIMARY KEY IDENTITY,
     UserId INT FOREIGN KEY REFERENCES Users(UserId),
@@ -77,67 +76,88 @@ CREATE TABLE Subscriptions (
     Price FLOAT,
     StartDate DATETIME,
     EndDate DATETIME,
-    Status NVARCHAR(50) -- active / expired / canceled
+    Status NVARCHAR(50)
 );
 
 
-INSERT INTO Users (Username, Password, Email, Role) VALUES
-(N'parent1', 'password123', 'parent1@example.com', 'parent'),
-(N'teacher1', 'password456', 'teacher1@example.com', 'teacher');
 
-INSERT INTO Subjects (Name, Description, Image) VALUES
-(N'Mathematics', N'The subject of numbers and calculations', 'math.png'),
-(N'Vietnamese', N'Native language learning', 'vietnamese.png');
+-- ===================== KẾT QUẢ CHAT AI =====================
 
-INSERT INTO Lectures (SubjectId, Title, Content, VideoURL) VALUES
-(1, N'Basic Addition', N'Lecture content about addition', 'video1.mp4'),
-(2, N'Reading Comprehension', N'Lecture content about reading', 'video2.mp4');
 
-INSERT INTO Practices (SubjectId, Question, Answer, Explanation, Type) VALUES
-(1, N'2 + 3 = ?', N'5', N'Add two integers', N'multiple_choice'),
-(2, N'Which sentence is correct?', N'Trees perform photosynthesis', N'Grade 2 knowledge', N'true_false');
 
-INSERT INTO Assignments (SubjectId, UserId, Title, Description, DueDate, Status) VALUES
-(1, 1, N'Addition Practice', N'Exercises about addition', '2025-05-15', 'not_submitted'),
-(2, 1, N'Reading Exercise 2', N'Read and answer questions', '2025-05-20', 'submitted');
 
-INSERT INTO Messages (UserId, Role, Content) VALUES
-(1, N'user', N'Hello AI teacher, what are we learning today?'),
-(1, N'assistant', N'Today we are learning about addition!');
+CREATE TABLE ChatResults (
+    ChatResultId INT PRIMARY KEY IDENTITY,
+    UserId INT NOT NULL,                      -- Mã người dùng
+    SubjectId INT NOT NULL,                   -- Môn học
+    Prompt NVARCHAR(MAX),                     -- Nội dung prompt ban đầu
+    AiResponse NVARCHAR(MAX),                 -- JSON gốc sinh câu hỏi từ AI
+    AiFeedback NVARCHAR(MAX),                 -- ✅ JSON phản hồi khi chấm bài
+	Questions NVARCHAR(MAX),
+    Score FLOAT NULL,                         -- ✅ Điểm tổng (0–10)
+    Comment NVARCHAR(MAX),                    -- ✅ Nhận xét tổng thể từ AI
+    IsGraded BIT DEFAULT 0,                   -- ✅ Đã chấm điểm chưa
+    CreatedAt DATETIME DEFAULT GETDATE()      -- Ngày tạo bản ghi
+);
 
-INSERT INTO Subscriptions (UserId, PackageName, Price, StartDate, EndDate, Status) VALUES
-(1, N'Free Package', 0, '2025-05-01', '2025-06-01', 'active'),
-(2, N'Premium Package', 199000, '2025-05-01', '2025-08-01', 'active');
 
-INSERT INTO Users (Username, Password, Email, Role) VALUES
-(N'phuhuynh1', 'matkhau123', 'ph1@example.com', 'phu_huynh'),
-(N'giaovien1', 'matkhau456', 'gv1@example.com', 'giao_vien');
-
-INSERT INTO Subjects (Name, Description, Image) VALUES
-(N'Toán học', N'Môn học về các con số', 'toan.png'),
-(N'Tiếng Việt', N'Học ngôn ngữ mẹ đẻ', 'tiengviet.png');
-
-INSERT INTO Lectures (SubjectId, Title, Content, VideoURL) VALUES
-(1, N'Phép cộng cơ bản', N'Nội dung bài giảng phép cộng', 'video1.mp4'),
-(2, N'Đọc hiểu đoạn văn', N'Nội dung bài đọc hiểu', 'video2.mp4');
-
-INSERT INTO Practices (SubjectId, Question, Answer, Explanation, Type) VALUES
-(1, N'2 + 3 = ?', N'5', N'Cộng hai số nguyên', N'trac nghiem'),
-(2, N'Câu nào là đúng?', N'Cây xanh quang hợp', N'Kiến thức lớp 2', N'dung sai');
-
-INSERT INTO Assignments (SubjectId, UserId, Title, Description, DueDate, Status) VALUES
-(1, 1, N'Giải toán cộng', N'Bài tập về phép cộng', '2025-05-15', 'chua nop'),
-(2, 1, N'Đọc hiểu bài 2', N'Đọc và trả lời câu hỏi', '2025-05-20', 'da nop');
-
-INSERT INTO Messages (UserId, Role, Content) VALUES
-(1, N'user', N'Chào thầy AI, hôm nay học gì?'),
-(1, N'assistant', N'Hôm nay chúng ta học về phép cộng nhé!');
-
-INSERT INTO Subscriptions (UserId, PackageName, Price, StartDate, EndDate, Status) VALUES
-(1, N'Gói miễn phí', 0, '2025-05-01', '2025-06-01', 'active'),
-(2, N'Gói nâng cao', 199000, '2025-05-01', '2025-08-01', 'active');
 
 
 select * from Users
 
-SELECT name FROM sys.tables;
+select * from Subjects
+select * from ChatResults
+
+
+INSERT INTO Users (Username, Password, Email, Role, Fullname, Age, Grade) VALUES
+(N'hocsinh1', '123456', 'hs1@kidseek.vn', 'Hoc_sinh', N'Nguyễn Văn A', 10, 4),  -- Học sinh lớp 4
+(N'hocsinh2', '123456', 'hs2@kidseek.vn', 'Hoc_sinh', N'Lê Thị B', 11, 5),
+(N'phuhuynh1', 'matkhau1', 'ph1@kidseek.vn', 'Phu_huynh', N'Trần Văn C', 38, 0), -- Phụ huynh
+(N'giaovien1', 'giaovien1', 'gv1@kidseek.vn', 'Giao_vien', N'Đỗ Thị D', 30, 0),   -- Giáo viên
+(N'admin', 'admin123', 'admin@kidseek.vn', 'Admin', N'Quản trị viên', 35, 0);     -- Quản trị
+INSERT INTO Subjects (Name, Description, Image) VALUES
+(N'Toán học', N'Học các phép tính, đại số, hình học', 'math.png'),
+(N'Tiếng Việt', N'Học đọc, viết, ngữ pháp tiếng Việt', 'tiengviet.png'),
+(N'Tiếng Anh', N'Học từ vựng, ngữ pháp, giao tiếp', 'english.png'),
+(N'Khoa học', N'Tìm hiểu thế giới tự nhiên, sinh vật, vật lý', 'science.png'),
+(N'Lịch sử', N'Học các sự kiện lịch sử Việt Nam và thế giới', 'history.png');
+INSERT INTO Lectures (SubjectId, Title, Content, VideoURL, QuizId) VALUES
+(1, N'Phép cộng cơ bản', N'Nội dung phép cộng cho học sinh lớp 1', 'video_add.mp4', NULL),
+(2, N'Tập đọc bài thơ', N'Đọc hiểu bài thơ thiếu nhi', 'video_read.mp4', NULL),
+(3, N'Giới thiệu bản thân bằng tiếng Anh', N'Ngữ pháp và từ vựng cơ bản', 'video_intro.mp4', NULL),
+(4, N'Cơ thể người', N'Tìm hiểu về các bộ phận cơ thể', 'video_body.mp4', NULL),
+(5, N'Chiến thắng Bạch Đằng', N'Lịch sử và ý nghĩa trận đánh', 'video_bachdang.mp4', NULL);
+INSERT INTO Assignments (SubjectId, UserId, Title, Description, DueDate, Status) VALUES
+(1, 1, N'Bài tập cộng trừ', N'Làm 10 bài tập về phép cộng trừ', '2025-05-20', 'not_submitted'),
+(2, 1, N'Tập đọc 2 đoạn văn', N'Ghi âm và nộp lại', '2025-05-21', 'submitted'),
+(3, 2, N'Giới thiệu bản thân', N'Viết đoạn văn ngắn bằng tiếng Anh', '2025-05-23', 'not_submitted'),
+(4, 1, N'Mô tả hệ tiêu hoá', N'Tổng hợp từ sách giáo khoa', '2025-05-24', 'submitted'),
+(5, 2, N'Tóm tắt cuộc khởi nghĩa Lam Sơn', N'10 dòng', '2025-05-25', 'not_submitted');
+INSERT INTO Practices (SubjectId, Question, Answer, Explanation, Type) VALUES
+(1, N'5 + 3 = ?', N'8', N'Cộng 5 với 3 ra 8', 'multiple_choice'),
+(2, N'Câu nào viết đúng chính tả?', N'Em yêu trường em', N'Không sai chính tả', 'true_false'),
+(3, N'What is the plural of “child”?', N'Children', N'Bất quy tắc', 'multiple_choice'),
+(4, N'Thực vật quang hợp vào thời điểm nào?', N'Ban ngày', N'Có ánh sáng mặt trời', 'multiple_choice'),
+(5, N'Chiến thắng Điện Biên diễn ra năm nào?', N'1954', N'Là mốc quan trọng của lịch sử VN', 'multiple_choice');
+INSERT INTO Messages (UserId, Role, Content) VALUES
+(1, N'user', N'Thầy ơi hôm nay học gì vậy?'),
+(1, N'assistant', N'Hôm nay chúng ta học Toán nhé!'),
+(2, N'user', N'Giúp em làm bài tiếng Anh với!'),
+(2, N'assistant', N'Dĩ nhiên rồi, bắt đầu nhé.'),
+(1, N'user', N'Thầy ơi, em nộp bài tập chưa?');
+INSERT INTO Subscriptions (UserId, PackageName, Price, StartDate, EndDate, Status) VALUES
+(1, N'Gói miễn phí', 0, '2025-05-01', '2025-06-01', 'active'),
+(2, N'Gói nâng cao', 199000, '2025-05-10', '2025-08-10', 'active'),
+(3, N'Gói thử nghiệm', 0, '2025-05-15', '2025-05-30', 'active'),
+(4, N'Premium+', 299000, '2025-05-01', '2025-09-01', 'expired'),
+(5, N'Gói thường', 99000, '2025-04-01', '2025-05-01', 'canceled');
+
+UPDATE Subjects SET Grade = 1 WHERE Name = N'Toán học';
+UPDATE Subjects SET Grade = 1 WHERE Name = N'Tiếng Việt';
+UPDATE Subjects SET Grade = 2 WHERE Name = N'Tiếng Anh';
+UPDATE Subjects SET Grade = 3 WHERE Name = N'Khoa học';
+UPDATE Subjects SET Grade = 4 WHERE Name = N'Lịch sử';
+
+
+DELETE TOP (134)
+  FROM ChatAnswers

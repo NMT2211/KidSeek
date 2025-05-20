@@ -1,0 +1,153 @@
+/* ChatWithSeek.css */
+
+.chat-container {
+  @apply max-w-6xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden mt-6;
+}
+
+.chat-header {
+  @apply bg-blue-500 text-white p-4 flex items-center gap-4;
+}
+
+.chat-avatar {
+  @apply w-12 h-12 rounded-full;
+}
+
+.chat-body {
+  @apply p-4 space-y-4 h-[500px] overflow-y-auto bg-gray-50;
+}
+
+.chat-bubble-user {
+  @apply ml-auto bg-blue-100 text-left p-3 rounded-lg w-fit max-w-full;
+}
+
+
+.chat-bubble-ai {
+  @apply max-w-[70%] mr-auto bg-white border p-3 rounded-lg;
+}
+
+.chat-input {
+  @apply p-4 border-t flex items-center gap-2;
+}
+
+.chat-textarea {
+  @apply flex-grow border rounded-lg p-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.chat-button {
+  @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700;
+}
+
+.ai-typing {
+  @apply text-gray-500 italic;
+}
+
+.markdown p {
+  @apply text-sm leading-relaxed mb-2;
+}
+
+.markdown strong {
+  @apply font-semibold text-black;
+}
+
+.markdown h3 {
+  @apply text-base font-bold mt-4 mb-2 text-blue-700;
+}
+
+.markdown ul {
+  @apply list-disc pl-5 space-y-1;
+}
+
+.markdown li {
+  @apply text-sm;
+}
+
+
+/* Tailwind-based utility */
+
+.chat-header {
+  @apply bg-blue-500 text-white p-4 flex items-center gap-4;
+}
+
+.chat-avatar {
+  @apply w-12 h-12 rounded-full;
+}
+
+.chat-body {
+  @apply p-4 space-y-4 flex-1 overflow-y-auto bg-gray-50;
+  min-height: 400px;
+}
+
+.chat-bubble-user {
+  @apply max-w-[75%] ml-auto bg-blue-100 text-left p-3 rounded-lg break-words;
+}
+
+.chat-bubble-ai {
+  @apply max-w-[75%] mr-auto bg-white border p-3 rounded-lg break-words;
+}
+
+.chat-input {
+  @apply p-4 border-t flex items-center gap-2;
+}
+
+.chat-textarea {
+  @apply flex-grow border rounded-lg p-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.chat-button {
+  @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition disabled:cursor-not-allowed;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 6px;
+  height: 16px;
+  padding-top: 2px;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background-color: #4f46e5;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 980px) {
+  .chat-container {
+    @apply rounded-none;
+  }
+
+  .chat-avatar {
+    @apply w-10 h-10;
+  }
+
+  .chat-body {
+    @apply p-3;
+  }
+
+  .chat-textarea {
+    @apply text-sm;
+  }
+
+  .chat-button {
+    @apply text-sm px-3 py-1.5;
+  }
+}

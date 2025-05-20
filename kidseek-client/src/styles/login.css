@@ -10,7 +10,7 @@
   line-height: 24px;
   margin-bottom: 32px;
   text-align: center;
-  text-size-adjust: 100%;
+ 
   unicode-bidi: isolate;
   width: 418.4px;
   -webkit-font-smoothing: antialiased;
@@ -46,7 +46,7 @@ h1 {
 }
 
 body {
-    -webkit-text-size-adjust: 100%;
+    
     -webkit-tap-highlight-color: transparent;
     background-color: #fff;
     background-color: var(--bs-body-bg);
@@ -89,3 +89,88 @@ body {
   }
 }
 
+
+.auth-container {
+  transition: transform 0.2s ease;
+}
+
+.auth-container:hover {
+  transform: translateY(-4px);
+}
+
+
+.floating {
+  animation: floatUpDown 2.5s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px); /* hoặc -5px nếu muốn nhẹ hơn */
+  }
+}
+
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  background-color: #2896f7; /* màu xanh nhẹ nhàng như lời tỏ tình */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition:
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.8s ease-in-out;
+  
+   box-shadow: 0 3px 8px rgba(99, 102, 241, 0.3);
+}
+
+.btn-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #48a7fb; /* xanh đậm hơn khi lướt qua */
+  z-index: 0;
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-animated:hover::before {
+  left: 0;
+}
+
+.btn-animated:hover {
+  transform: translateY(-3px);
+   box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);/* đổ bóng có chiều sâu như triết lý sống */
+  background-color: #4fadfe;
+}
+
+.btn-animated > span {
+  position: relative;
+  z-index: 1;
+}
+
+
+input:focus {
+  outline: none;
+  border-color: #1E88E5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.25); /* viền sáng nhẹ */
+  transition: all 0.2s ease;
+}
+
+
+.KidSeek{
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #510a8b; /* màu xanh nhẹ nhàng như lời tỏ tình */
+  text-align: center;
+  margin-bottom: 20px;
+}

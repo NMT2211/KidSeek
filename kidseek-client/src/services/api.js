@@ -2,12 +2,18 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5069/api/auth', // Ví dụ
+  baseURL: 'http://localhost:5069/api', // Ví dụ
   headers: {
     'Content-Type': 'application/json',
   }
 });
 
-export const getCourses = () => api.get('/courses');
-export const loginUser = (data) => api.post('/login', data);
-export const registerUser = (data) => api.post('/register', data);
+
+
+// Auth
+export const loginUser = (data) => api.post('/auth/login', data);
+export const registerUser = (data) => api.post('/auth/register', data);
+
+// Subjects
+export const getAllSubjects = () => api.get('/subjects');
+export const getSubjectsByGrade = (grade) => api.get(`/subjects/by-grade/${grade}`);

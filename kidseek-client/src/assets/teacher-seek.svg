@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(25, 10)">
+    <!-- Head -->
+    <circle cx="50" cy="35" r="30" fill="#ffdbac" />
+    
+    <!-- Hair -->
+    <path d="M20,35 C20,18 35,5 50,5 C65,5 80,18 80,35 C80,35 80,20 65,15 C65,15 58,5 50,5 C42,5 35,15 35,15 C20,20 20,35 20,35 Z" fill="#4a3000" />
+    
+    <!-- Eyes -->
+    <ellipse cx="35" cy="30" rx="5" ry="5" fill="#4a3000" />
+    <ellipse cx="65" cy="30" rx="5" ry="5" fill="#4a3000" />
+    
+    <!-- Eyebrows -->
+    <path d="M30,23 C35,20 40,22 40,22" stroke="#4a3000" stroke-width="2" fill="none" />
+    <path d="M60,23 C65,20 70,22 70,22" stroke="#4a3000" stroke-width="2" fill="none" />
+    
+    <!-- Glasses -->
+    <rect x="28" y="25" width="14" height="10" rx="5" ry="5" fill="none" stroke="#333" stroke-width="1.5" />
+    <rect x="58" y="25" width="14" height="10" rx="5" ry="5" fill="none" stroke="#333" stroke-width="1.5" />
+    <line x1="42" y1="30" x2="58" y2="30" stroke="#333" stroke-width="1.5" />
+    
+    <!-- Mouth (smile) -->
+    <path d="M40,45 C45,55 55,55 60,45" stroke="#333" stroke-width="1.5" fill="none" />
+    
+    <!-- Beard -->
+    <path d="M35,45 C40,55 60,55 65,45 C65,60 55,65 50,65 C45,65 35,60 35,45 Z" fill="#4a3000" opacity="0.3" />
+    
+    <!-- Body (upper part) -->
+    <path d="M30,65 C30,65 25,95 25,110 C25,115 75,115 75,110 C75,95 70,65 70,65 C60,75 40,75 30,65 Z" fill="#1976d2" />
+    
+    <!-- Collar -->
+    <path d="M37,65 L50,75 L63,65" stroke="white" stroke-width="2" fill="none" />
+    
+    <!-- Arms -->
+    <path d="M25,75 C15,85 10,95 15,100" stroke="#1976d2" stroke-width="12" fill="none" />
+    <path d="M75,75 C85,85 90,95 85,100" stroke="#1976d2" stroke-width="12" fill="none" />
+    
+    <!-- Hands -->
+    <circle cx="15" cy="100" r="8" fill="#ffdbac" />
+    <circle cx="85" cy="100" r="8" fill="#ffdbac" />
+    
+    <!-- Tie -->
+    <path d="M50,65 L45,85 L50,105 L55,85 L50,65 Z" fill="#e53935" />
+  </g>
+  
+  <!-- Lightbulb - Intelligence symbol -->
+  <g transform="translate(95, 25)">
+    <circle cx="15" cy="15" r="15" fill="#ffeb3b" opacity="0.7" />
+    <path d="M15,5 C10,5 6,9 6,14 C6,17 8,20 10,21 L10,26 C10,27 12,28 14,28 L16,28 C18,28 20,27 20,26 L20,21 C22,20 24,17 24,14 C24,9 20,5 15,5 Z" fill="#ffeb3b" />
+    <rect x="13" y="22" width="4" height="6" rx="1" fill="#ffeb3b" />
+  </g>
+</svg>

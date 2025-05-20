@@ -1,0 +1,58 @@
+.hero-highlight {
+  
+}
+
+.underline-animate {
+  position: relative;
+  display: inline-block;
+  color: #373af1; /* tím xanh nhạt */
+}
+
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 3px;
+  width: 100%;
+  background-color: #6366f1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease-out, transform-origin 0s;
+}
+
+.underline-animate:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.underline-animate:not(:hover)::after {
+  transform-origin: right;
+}
+
+@keyframes slide-in-underline {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+
+.custom-timeline {
+  position: relative;
+}
+
+.custom-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  width: 2px;
+  height: 100%;
+  background-color: transparent;
+  border-left: 2px dashed #e5e7eb; /* gray-200 */
+}

@@ -16,3 +16,48 @@ code {
 @tailwind components;
 @tailwind utilities;
 
+/* Navbar.css */
+
+.nav-item {
+  @apply flex items-center gap-1 px-3 py-1 rounded-lg text-base font-medium transition;
+}
+
+.nav-item:hover {
+  @apply bg-blue-50 text-blue-600;
+}
+
+.nav-item-active {
+  @apply bg-blue-100 text-blue-600 font-semibold;
+}
+
+.user-button {
+  @apply flex items-center gap-2 px-3 py-2 bg-blue-100 rounded hover:text-blue-600 font-medium text-base;
+}
+
+.dropdown-menu {
+  @apply absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg border z-50 text-base font-medium;
+}
+
+.dropdown-item {
+  @apply w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-gray-100;
+}
+@keyframes wave {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.wave-loader span {
+  display: inline-block;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.wave-loader span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.wave-loader span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+

@@ -9,5 +9,9 @@ namespace KidSeek.Api.Data
             : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<ChatResult> ChatResults { get; set; }
+        public DbSet<ChatAnswer> ChatAnswers { get; set; }
+
     }
 }

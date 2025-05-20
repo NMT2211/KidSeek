@@ -14,6 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Cấu hình mặc định đã đọc appsettings rồi
+
 // Cấu hình CORS
 builder.Services.AddCors(options =>
 {
